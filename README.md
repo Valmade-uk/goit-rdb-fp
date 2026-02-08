@@ -69,6 +69,13 @@ CREATE TABLE IF NOT EXISTS entities (
 
 Таблиця наповнена унікальними парами `(Entity, Code)` з початкових даних.
 
+```sql
+INSERT INTO entities (entity, code)
+SELECT DISTINCT Entity, Code
+FROM infectious_cases
+WHERE Entity IS NOT NULL AND Code IS NOT NULL;
+```
+
 ---
 
 ### 2️⃣ Нормалізована таблиця випадків захворювань
@@ -102,7 +109,24 @@ CREATE TABLE IF NOT EXISTS infectious_cases_norm (
 - числові значення безпечно приведені до типу `DECIMAL` за допомогою:
 
 ```sql
-CAST(NULLIF(TRIM(column), '') AS DECIMAL(18,6))
+INSERT INTO infectious_cases_norm
+(entity_id, year, number_yaws, polio_cases, cases_guinea_worm, number_rabies,
+ number_malaria, number_hiv, number_tuberculosis, number_smallpox, number_cholera_cases)
+SELECT
+  e.id,
+  ic.Year,
+  CAST(NULLIF(TRIM(ic.Number_yaws), '') AS DECIMAL(18,6)),
+  ic.polio_cases,
+  ic.cases_guinea_worm,
+  CAST(NULLIF(TRIM(ic.Number_rabies), '') AS DECIMAL(18,6)),
+  CAST(NULLIF(TRIM(ic.Number_malaria), '') AS DECIMAL(18,6)),
+  CAST(NULLIF(TRIM(ic.Number_hiv), '') AS DECIMAL(18,6)),
+  CAST(NULLIF(TRIM(ic.Number_tuberculosis), '') AS DECIMAL(18,6)),
+  CAST(NULLIF(TRIM(ic.Number_smallpox), '') AS DECIMAL(18,6)),
+  CAST(NULLIF(TRIM(ic.Number_cholera_cases), '') AS DECIMAL(18,6))
+FROM infectious_cases ic
+JOIN entities e
+  ON e.entity = ic.Entity AND e.code = ic.Code;
 ```
 
 Це забезпечує коректні аналітичні обчислення.
