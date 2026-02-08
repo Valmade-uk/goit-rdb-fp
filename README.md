@@ -1,5 +1,5 @@
 
-# goit-rdb-fp
+# Relational Databases: Concepts and Techniques
 ## Фінальний проєкт — Реляційні бази даних (MySQL)
 
 ---
