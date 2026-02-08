@@ -18,6 +18,42 @@
 
 ---
 
+## 📁 Структура репозиторію
+
+```
+goit-rdb-fp/
+│
+├── task_1/                         # створення схеми та імпорт даних
+│   ├── create_schema.png
+│   ├── import_infectious_cases.png
+│   └── count_rows.png
+│
+├── task_2/                         # нормалізація даних до 3НФ
+│   ├── create_entities_table.png
+│   ├── fill_entities.png
+│   ├── create_infectious_cases_norm.png
+│   └── insert_infectious_cases_norm.png
+│
+├── task_3/                         # аналітичні SQL-запити
+│   └── rabies_statistics_top10.png
+│
+├── task_4/                         # робота з датами
+│   └── year_date_difference.png
+│
+├── task_5/                         # користувацькі SQL-функції
+│   ├── years_since_function                # years_since / years_since(...) — різниця в роках
+│   └── execute_years_since_function        # запит з використанням функції
+│
+├── task_bonus/                         # користувацькі SQL-функції       
+│   ├── cases_per_period_function.png       # cases_per_period(year_cases, divisor)
+│   └── execute_cases_per_period.png        # приклад запуску на даних (rabies per month/quarter/halfyear)
+│
+└── README.md
+
+```
+
+---
+
 ## 🗂 Дані
 
 - Файл-джерело: `infectious_cases.csv`
